@@ -26,13 +26,17 @@ pub struct JsonReq {
 * Send a json request to given url 
 */
 fn send_request(request_url: &str, req: &JsonReq) -> reqwest::Result<()> {
+    println!("sending request now!");
     let mut response = reqwest::Client::new()
         .post(request_url)
         .json(&req)
         .send()?;
 
+    println!("so far, so good");
     let out_text = response.text()?;
+    println!("so far, so good...");
     let out_slice = out_text.as_str();
+    println!("so far, so good!");
     let out_json: Value = serde_json::from_str(&out_slice).unwrap();
     println!("{}", out_json);
 
