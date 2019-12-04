@@ -5,6 +5,7 @@ version = "0.1.0"
 authors = ["Martin GUILLOUX <martin.guilloux@protonmail.com.com>"]
 edition = "2018"
 license = "GPL-3.0-or-later"
+repository = "https://github.com/Marthin-/syspass-api"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
