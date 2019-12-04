@@ -22,7 +22,6 @@ pub struct JsonReq {
 * Send a json request to given url 
 */
 fn send_request(request_url: &str, req: &JsonReq) -> reqwest::Result<()> {
-    println!("sending request now!");
     let mut response = reqwest::Client::new()
         .post(request_url)
         .json(&req)
