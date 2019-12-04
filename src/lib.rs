@@ -4,12 +4,8 @@ extern crate reqwest;
 #[macro_use]
 extern crate serde_derive;
 use serde_json::{Value};
-use std::env;
 use std::collections::HashMap;
 
-////unused... For now
-//use std::process::Command;
-//use std::io::{stdout, Read, Write, stdin};
 
 /*
 * Struct used to store parts of the json request
@@ -32,11 +28,9 @@ fn send_request(request_url: &str, req: &JsonReq) -> reqwest::Result<()> {
         .json(&req)
         .send()?;
 
-    println!("so far, so good");
     let out_text = response.text()?;
-    println!("so far, so good...");
+    println!("{:?}", out_text);
     let out_slice = out_text.as_str();
-    println!("so far, so good!");
     let out_json: Value = serde_json::from_str(&out_slice).unwrap();
     println!("{}", out_json);
 
