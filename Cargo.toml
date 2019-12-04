@@ -1,0 +1,16 @@
+[package]
+name = "syspass_api"
+description = "An API wrapper for syspass written in Rust"
+version = "0.1.0"
+authors = ["Martin GUILLOUX <martin.guilloux@protonmail.com.com>"]
+edition = "2018"
+license = "LGPL-3.0-or-later"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde_json = "1.0"
+reqwest = "0.9.22"
+serde_derive = "1.0"
+json = "0.12.0"
+serde="1.0"
