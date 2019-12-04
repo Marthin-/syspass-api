@@ -29,7 +29,6 @@ fn send_request(request_url: &str, req: &JsonReq) -> reqwest::Result<()> {
         .send()?;
 
     let out_text = response.text()?;
-    println!("{:?}", out_text);
     let out_slice = out_text.as_str();
     let out_json: Value = serde_json::from_str(&out_slice).unwrap();
     println!("{}", out_json);
