@@ -21,7 +21,7 @@ pub struct JsonReq {
 /*
 * Send a json request to given url 
 */
-fn send_request(request_url: &str, req: &JsonReq) -> reqwest::Result<()> {
+fn send_request(request_url: &str, req: &JsonReq) -> Value {
     let mut response = reqwest::Client::new()
         .post(request_url)
         .json(&req)
@@ -30,9 +30,7 @@ fn send_request(request_url: &str, req: &JsonReq) -> reqwest::Result<()> {
     let out_text = response.text()?;
     let out_slice = out_text.as_str();
     let out_json: Value = serde_json::from_str(&out_slice).unwrap();
-    println!("{}", out_json);
-
-    Ok(())
+    out_json
 }
 
 /*
@@ -50,5 +48,5 @@ pub fn forge_and_send(request_url: &str, auth_token: &str, method: &str, args: V
         }
     }
     let req = JsonReq{jsonrpc: String::from("2.0"), method: method.to_string(), params: params_hm, id: 1,};
-    send_request(&request_url, &req)
+    let reply_json: Value = send_request(&request_url, &req);
 }
