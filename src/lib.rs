@@ -25,9 +25,9 @@ fn send_request(request_url: &str, req: &JsonReq) -> Value {
     let mut response = reqwest::Client::new()
         .post(request_url)
         .json(&req)
-        .send()?;
+        .send().unwrap();
 
-    let out_text = response.text()?;
+    let out_text = response.text().unwrap();
     let out_slice = out_text.as_str();
     let out_json: Value = serde_json::from_str(&out_slice).unwrap();
     out_json
@@ -37,7 +37,7 @@ fn send_request(request_url: &str, req: &JsonReq) -> Value {
 * Forge a request with arguments and
 * send it at the same time : EPIC
 */
-pub fn forge_and_send(request_url: &str, auth_token: &str, method: &str, args: Vec<String>) -> reqwest::Result<()> {
+pub fn forge_and_send(request_url: &str, auth_token: &str, method: &str, args: Vec<String>) -> serde_json::Value {
     let mut params_hm: HashMap<String, String> = HashMap::new();
     params_hm.insert("authToken".to_string(), auth_token.to_string());
     for arg in args.iter() {
@@ -49,4 +49,5 @@ pub fn forge_and_send(request_url: &str, auth_token: &str, method: &str, args: V
     }
     let req = JsonReq{jsonrpc: String::from("2.0"), method: method.to_string(), params: params_hm, id: 1,};
     let reply_json: Value = send_request(&request_url, &req);
+    reply_json
 }
