@@ -31,7 +31,7 @@ pub struct APIOutput {
     id: u8,
     jsonrpc: String,
     result: APIResult,
-    resultcode: u16,
+    resultCode: u16,
     resultMessage: Option<String>,
 }
 
